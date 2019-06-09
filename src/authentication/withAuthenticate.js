@@ -13,7 +13,7 @@ const withAuthenticate = App => {
       this.retrieveData();
 
       this.state = {
-        isLoggedIn: false,
+        isLoggedIn: this.isLoggedIn,
         formInputs: [
           {
             placeholder: "Player 1's name",
@@ -36,8 +36,9 @@ const withAuthenticate = App => {
         for (let i = 0; i < localStorage.length; i++) {
           let retrievedPlayer = JSON.parse(window.localStorage.getItem(i));
           this.retrievedData = [...this.retrievedData, retrievedPlayer];
-          console.log(this.retrievedData);
         }
+
+        this.isLoggedIn = true;
       }
     };
 
@@ -83,7 +84,9 @@ const withAuthenticate = App => {
 
     render() {
       if (this.state.isLoggedIn) {
-        return <App />;
+        return <App 
+          userData={this.retrievedData}
+        />;
       }
       return (
         <LoginPage

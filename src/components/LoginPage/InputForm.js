@@ -44,6 +44,7 @@ const StyledInputForm = styled.div`
         padding-left: 16px;
         font-size: 16px;
         margin: 8px 0;
+        color: #E4E6E8;
     }
 
     input::placeholder {
