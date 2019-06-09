@@ -1,4 +1,5 @@
 import React from 'react';
+import LoginPage from '../components/LoginPage/LoginPage';
 
 const withAuthenticate = App => {
     return class extends React.Component {
@@ -14,7 +15,7 @@ const withAuthenticate = App => {
             if(this.state.isLoggedIn) {
                 return <App />
             }
-            return <div>Login</div>
+            return <LoginPage>Login</LoginPage>
         }
     }
 }
