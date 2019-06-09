@@ -14,7 +14,7 @@ class LoginPage extends React.Component {
         <Header />
             <LoginWrapper>
                 <HeroChart />
-                <HeroForm />
+                <HeroForm formInputs={this.props.formInputs} addPlayer={this.props.addPlayer} />
             </LoginWrapper>
         <Footer />
       </>
