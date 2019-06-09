@@ -54,7 +54,7 @@ const StyledHeader = styled.div`
         align-items: center;
 
         .LogoIcon {
-            height: 35px;
+            height: 30px;
             margin-right: 16px;
             padding-right: 16px
             border-right: 1px solid #EAEAEA;
@@ -69,7 +69,7 @@ const StyledHeader = styled.div`
         }
 
         .LogoText {
-            height: 35px;
+            height: 25px;
             img {
                 height: inherit;
             }
