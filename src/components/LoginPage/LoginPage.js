@@ -1,16 +1,16 @@
 import React from "react";
-import styled from "styled-components";
-import Header from './Header';
-
+import Header from "./Header";
+import Footer from "./Footer";
 
 class LoginPage extends React.Component {
   render() {
     return (
-      <Header />
-
+      <>
+        <Header />
+        <Footer />
+      </>
     );
   }
 }
-
 
 export default LoginPage;
