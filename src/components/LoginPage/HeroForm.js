@@ -9,7 +9,9 @@ class HeroForm extends React.Component {
 
   renderAddPlayer = () => {
     return this.props.formInputs.length < 4 ? (
-      <p onClick={this.onClickAddPlayer}>Add another player</p>
+      <p className="right-aligned-hero-text" onClick={this.onClickAddPlayer}>
+        Add another player
+      </p>
     ) : null;
   };
 
@@ -41,9 +43,10 @@ class HeroForm extends React.Component {
 }
 
 const StyledHeroForm = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 40%;
   padding: 0 5%;
-  border: 1px solid red;
 
   @media only screen and (max-width: 700px) {
     width: 90%;
@@ -57,9 +60,27 @@ const StyledHeroForm = styled.div`
   }
 
   p {
-      color: #E4E6E8;
-      font-size: 20px;
-      font-weight: 500;
+    color: #e4e6e8;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .right-aligned-hero-text {
+    text-align: right;
+    color: #61dafb;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 0.6em 1em;
+    font-size: 20px;
+    font-weight: 500;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 2px;
+    border-color: #61dafb;
+    background: #61dafb;
+    color: #282c34;
   }
 `;
 
