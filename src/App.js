@@ -1,14 +1,13 @@
-import React from 'react';
-import withAuthenticate from './authentication/withAuthenticate';
+import React from "react";
+import LeaderboardPage from "./components/LeaderboardPage/LeaderboardPage";
+import withAuthenticate from "./authentication/withAuthenticate";
 
-const ComponentFromWithAuthenticate = withAuthenticate();
+const ComponentFromWithAuthenticate = withAuthenticate(LeaderboardPage);
 
-function App() {
-  return (
-    <div>
-
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return <ComponentFromWithAuthenticate />;
+  }
 }
 
 export default App;
