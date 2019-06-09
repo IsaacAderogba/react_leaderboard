@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 import Header from "./Header";
 import Footer from "./Footer";
-import HeroChart from './HeroChart'
+import HeroChart from './HeroChart';
+import HeroForm from './HeroForm';
 
 
 class LoginPage extends React.Component {
@@ -13,6 +14,7 @@ class LoginPage extends React.Component {
         <Header />
             <LoginWrapper>
                 <HeroChart />
+                <HeroForm />
             </LoginWrapper>
         <Footer />
       </>
@@ -22,7 +24,7 @@ class LoginPage extends React.Component {
 
 const LoginWrapper = styled.div`
   display: flex;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
