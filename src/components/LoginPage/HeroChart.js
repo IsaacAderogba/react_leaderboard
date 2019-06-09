@@ -15,14 +15,10 @@ class HeroChart extends React.Component {
 const StyledHeroChart = styled.div`
   width: 40%;
   height: 80vh;
-  padding: 0 5%;
+  padding: 0 2.5%;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media only screen and (max-width: 700px) {
-    display: none;
-  }
 
   img {
     height: 80vh;

@@ -45,8 +45,8 @@ class HeroForm extends React.Component {
 const StyledHeroForm = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
-  padding: 0 5%;
+  width: 50%;
+  padding: 0 2.5%;
 
   @media only screen and (max-width: 700px) {
     width: 90%;
@@ -54,6 +54,7 @@ const StyledHeroForm = styled.div`
   }
 
   h1 {
+    margin-top: 0;
     color: white;
     font-size: 48px;
     margin-bottom: 0;
@@ -69,9 +70,11 @@ const StyledHeroForm = styled.div`
     text-align: right;
     color: #61dafb;
     font-size: 16px;
+    cursor: pointer;
   }
 
   button {
+    margin-top: 16px;
     padding: 0.6em 1em;
     font-size: 20px;
     font-weight: 500;

@@ -32,6 +32,10 @@ const LoginWrapper = styled.div`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 export default LoginPage;
