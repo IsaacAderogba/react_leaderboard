@@ -25,7 +25,7 @@ class HeroForm extends React.Component {
         </p>
         <form>
           {formInputs.map(inputContent => {
-            return <InputForm key={inputContent.id} inputContent={inputContent} />;
+            return <InputForm key={inputContent.id} inputContent={inputContent} changeFormValue={this.props.changeFormValue} />;
           })}
           {this.renderAddPlayer()}
           <button>Compete now</button>
