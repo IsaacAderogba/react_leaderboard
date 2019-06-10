@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../LoginPage/Header";
 import Footer from "../LoginPage/Footer";
+import Leaderboard from "./Leaderboard";
 
 import ProgressChart from "./ProgressChart";
 import styled from "styled-components";
@@ -25,6 +26,8 @@ class LeaderboardPage extends React.Component {
           ? this.amendedConfigData
           : props.configData
     };
+
+    console.log(this.state.appData)
   }
 
   configureData = () => {
@@ -101,21 +104,21 @@ class LeaderboardPage extends React.Component {
     let numCompleted = 0;
 
     this.state.appData.forEach(user => {
-      if(user.valueFlag === false) {
+      if (user.valueFlag === false) {
         numCompleted = numCompleted + 1;
       }
     });
 
-    if(numCompleted === numToComplete) {
+    if (numCompleted === numToComplete) {
       let newAppData = this.state.appData.map(user => {
         user.valueFlag = true;
         user.currentValue = 0;
         return user;
-      })
+      });
 
-      this.setState({ appData: newAppData })
+      this.setState({ appData: newAppData });
     }
-  }
+  };
 
   render() {
     this.saveData();
@@ -123,8 +126,9 @@ class LeaderboardPage extends React.Component {
     return (
       <div>
         <Header />
-        <button onClick={this.onCompleteRound}>Complete Round</button>
-
+        <StyledLeaderboardContainer>
+          <Leaderboard onCompleteRound={this.onCompleteRound} />
+        </StyledLeaderboardContainer>
         <StyledChartsContainer>
           {this.state.appData.map(user => {
             return (
@@ -142,6 +146,14 @@ class LeaderboardPage extends React.Component {
     );
   }
 }
+
+const StyledLeaderboardContainer = styled.div`
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+`;
 
 const StyledChartsContainer = styled.div`
   display: flex;

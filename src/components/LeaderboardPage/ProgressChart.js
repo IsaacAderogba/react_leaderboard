@@ -11,7 +11,7 @@ class ProgressChart extends React.Component {
     const { playerColor, data, labels } = props.userData;
     this.chart = {
       data: {
-        labels: labels,
+        labels: labels.slice(Math.max(labels.length - 6, 0)),
         datasets: [
           {
             fill: false,
@@ -31,7 +31,8 @@ class ProgressChart extends React.Component {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: data
+            data: data.slice(Math.max(data.length - 6, 0))
+
           }
         ]
       }
@@ -49,7 +50,7 @@ class ProgressChart extends React.Component {
           options={{
             title: {
               display: true,
-              text: this.props.userData.playerName,
+              text: `${this.props.userData.playerName}'s Progress`,
               fontColor: "#E4E6E8",
               fontSize: "24"
             },
