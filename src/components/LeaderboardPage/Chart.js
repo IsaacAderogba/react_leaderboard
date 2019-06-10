@@ -8,26 +8,25 @@ class Charts extends React.Component {
     this.state = {
       data: {
         labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July"
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
         ],
         datasets: [
           {
-            label: "My First dataset",
             fill: false,
             lineTension: 0.1,
             backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
+            borderColor: "#61DAFB",
             borderCapStyle: "butt",
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: "miter",
-            pointBorderColor: "rgba(75,192,192,1)",
+            pointBorderColor: "#61DAFB",
             pointBackgroundColor: "#fff",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
@@ -53,15 +52,28 @@ class Charts extends React.Component {
           options={{
             title: {
               display: true,
-              text: "Largest Cities in Massachusetts",
+              text: "Player 1", 
+              fontColor: "#E4E6E8"
             },
             maintainAspectRatio: true,
             legend: {
-              // display: false, <- hides display
-              // position: 'right'
-              labels: {
-                fontColor: "#000"
-              }
+              display: false
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    fontColor: "#E4E6E8"
+                  }
+                }
+              ],
+              xAxes: [
+                {
+                  ticks: {
+                    fontColor: "#E4E6E8"
+                  }
+                }
+              ]
             }
           }}
         />
@@ -71,7 +83,7 @@ class Charts extends React.Component {
 }
 
 const StyledChart = styled.div`
-    width: 500px;
-`
+  width: 500px;
+`;
 
 export default Charts;

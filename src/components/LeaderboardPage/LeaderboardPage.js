@@ -8,8 +8,29 @@ import styled from "styled-components";
 class LeaderboardPage extends React.Component {
   constructor(props) {
     super(props);
+    this.amendedData = [];
 
-    console.log(props);
+    if('data' in props.userData[0]) {
+      // use existing data
+    } else {
+      this.configureData();
+    }
+
+    this.state = {
+        appData: this.amendedData.length > 1 ? this.amendedData : props.userData,
+        config: {
+     
+        }
+    }
+
+    console.log(this.state.appData)
+  }
+
+  configureData = () => {
+    this.amendedData = this.props.userData.map(user => {
+      console.log(user);
+     return  {...user, labels: [], data: [], currentValue: 0, points: 0, progress: 0}
+    });
   }
 
   render() {
@@ -17,8 +38,6 @@ class LeaderboardPage extends React.Component {
       <div>
         <Header />
         <StyledChartsContainer>
-          <Chart />
-          <Chart />
           <Chart />
         </StyledChartsContainer>
         <Footer />
