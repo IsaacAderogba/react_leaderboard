@@ -10,6 +10,7 @@ const withAuthenticate = App => {
       super();
       this.isLoggedIn = false;
       this.retrievedData = [];
+      this.retrievedConfig = [];
       this.retrieveData();
 
       this.state = {
@@ -34,8 +35,19 @@ const withAuthenticate = App => {
     retrieveData = () => {
       if (localStorage.length >= 1) {
         for (let i = 0; i < localStorage.length; i++) {
-          let retrievedPlayer = JSON.parse(window.localStorage.getItem(i));
-          this.retrievedData = [...this.retrievedData, retrievedPlayer];
+            if(JSON.parse(window.localStorage.getItem(i)) == null) {
+              // do nothing
+            } else {
+            let retrievedPlayer = JSON.parse(window.localStorage.getItem(i));
+            this.retrievedData = [...this.retrievedData, retrievedPlayer];
+            }
+        }
+
+        for (let i = 0; i < localStorage.length; i++) {
+          if (window.localStorage.getItem("config")) {
+            this.retrievedConfig = JSON.parse(window.localStorage.getItem("config"))
+            
+          }
         }
 
         this.isLoggedIn = true;
@@ -84,9 +96,12 @@ const withAuthenticate = App => {
 
     render() {
       if (this.state.isLoggedIn) {
-        return <App 
-          userData={this.retrievedData}
-        />;
+        return (
+          <App
+            userData={this.retrievedData}
+            configData={this.retrievedConfig}
+          />
+        );
       }
       return (
         <LoginPage
