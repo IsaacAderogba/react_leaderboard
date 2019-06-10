@@ -2,15 +2,16 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
 
+import UpdateProgress from "./UpdateProgress";
+
 class ProgressChart extends React.Component {
   constructor(props) {
     super(props);
 
-    const {playerColor, data, label } = props.userData
-    console.log(props);
-    this.state = {
+    const { playerColor, data, labels } = props.userData;
+    this.chart = {
       data: {
-        labels: label,
+        labels: labels,
         datasets: [
           {
             fill: false,
@@ -38,10 +39,11 @@ class ProgressChart extends React.Component {
   }
 
   render() {
+
     return (
       <StyledProgressChart>
         <Line
-          data={this.state.data}
+          data={this.chart.data}
           width={100}
           height={70}
           options={{
@@ -49,7 +51,7 @@ class ProgressChart extends React.Component {
               display: true,
               text: this.props.userData.playerName,
               fontColor: "#E4E6E8",
-              fontSize: '24'
+              fontSize: "24"
             },
             maintainAspectRatio: true,
             legend: {
@@ -60,6 +62,12 @@ class ProgressChart extends React.Component {
                 {
                   ticks: {
                     fontColor: "#E4E6E8"
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: this.props.configData[0].yAxisLabel,
+                    fontColor: "#E4E6E8",
+                    fontSize: "18"
                   }
                 }
               ],
@@ -73,6 +81,7 @@ class ProgressChart extends React.Component {
             }
           }}
         />
+        <UpdateProgress userData={this.props.userData} onSubmitUpdate={this.props.onSubmitUpdate} />
       </StyledProgressChart>
     );
   }

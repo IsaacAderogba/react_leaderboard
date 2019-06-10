@@ -13,7 +13,6 @@ class LeaderboardPage extends React.Component {
 
     if ("data" in props.userData[0]) {
       // do nothing
-      console.log("Using local storage data");
     } else {
       this.configureData();
     }
@@ -26,18 +25,16 @@ class LeaderboardPage extends React.Component {
           ? this.amendedConfigData
           : props.configData
     };
-
-    console.log(this.state.appData, this.state.configData);
   }
 
   configureData = () => {
     this.amendedUserData = this.props.userData.map(user => {
-      console.log(user);
       return {
         ...user,
         labels: [],
         data: [],
         currentValue: 0,
+        valueFlag: true,
         points: 0,
         progress: 0
       };
@@ -46,7 +43,8 @@ class LeaderboardPage extends React.Component {
     this.amendedConfigData = [
       ...this.amendedConfigData,
       { yAxisLabel: "Enter Label" },
-      { successMetric: "UpTheChart" }
+      { successMetric: "UpTheChart" },
+      { startFlag: false }
     ];
   };
 
@@ -62,16 +60,76 @@ class LeaderboardPage extends React.Component {
     localStorage.setItem("config", JSON.stringify(this.state.configData));
   };
 
+  onSubmitUpdate = (name, value) => {
+    const newAppData = this.state.appData.map(user => {
+      if (user.playerName === name) {
+        let dateString = new Date().toString();
+        let truncDate = dateString.substr(4, 6);
+
+        if (user.valueFlag) {
+          user.currentValue = parseFloat(value);
+          user.data.push(user.currentValue);
+          user.labels.push(truncDate);
+          user.valueFlag = false;
+        } else {
+          user.currentValue = parseFloat(value);
+          let amendedDataArray = [];
+          let amendedLabelArray = [];
+          for (let i = 0; i < user.data.length; i++) {
+            if (i === user.data.length - 1) {
+              let amendedValue = parseFloat(value);
+              amendedDataArray.push(amendedValue);
+              amendedLabelArray.push(truncDate);
+            } else {
+              amendedDataArray.push(user.data[i]);
+              amendedLabelArray.push(user.labels[i]);
+            }
+          }
+          user.data = amendedDataArray;
+          user.labels = amendedLabelArray;
+        }
+      }
+      console.log(user);
+      return user;
+    });
+
+    this.setState({ appData: newAppData });
+  };
+
+  onCompleteRound = () => {
+    let numToComplete = this.state.appData.length;
+    let numCompleted = 0;
+
+    this.state.appData.forEach(user => {
+      if(user.valueFlag === false) {
+        numCompleted = numCompleted + 1;
+      }
+    });
+
+    if(numCompleted === numToComplete) {
+      let newAppData = this.state.appData.map(user => {
+        user.valueFlag = true;
+        user.currentValue = 0;
+        return user;
+      })
+
+      this.setState({ appData: newAppData })
+    }
+  }
+
   render() {
     this.saveData();
 
     return (
       <div>
         <Header />
+        <button onClick={this.onCompleteRound}>Complete Round</button>
+
         <StyledChartsContainer>
           {this.state.appData.map(user => {
             return (
               <ProgressChart
+                onSubmitUpdate={this.onSubmitUpdate}
                 key={user.playerName}
                 userData={user}
                 configData={this.state.configData}
