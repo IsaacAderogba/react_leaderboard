@@ -16,7 +16,7 @@ class UpdateProgress extends React.Component {
   };
 
   onSubmit = event => {
-    //   event.preventDefault();
+    event.preventDefault();
     this.props.onSubmitUpdate(this.props.userData.playerName, this.state.inputValue);
     this.setState({ inputValue: ''})
   }
