@@ -1,46 +1,38 @@
-import React from "react";
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-class InputForm extends React.Component {
-  constructor(props) {
-    super(props);
+const InputForm = ({ configData, onLabelChange, onTournamentChange }) => {
+  const [tournamentName] = useState(configData[0].tournamentName);
+  const [tournamentValue, setTournamentValue] = useState("");
+  const [yAxisName] = useState(configData[1].yAxisLabel);
+  const [yAxisValue, setYAxisValue] = useState("");
 
-    this.state = {
-      tournamentName: props.configData[0].tournamentName,
-      tournamentValue: "",
-      yAxisName: props.configData[1].yAxisLabel,
-      yAxisValue: ""
-    };
-  }
-
-  onAxisChange = input => {
-    this.setState({ yAxisValue: input.target.value });
-    this.props.onLabelChange(input.target.value);
+  const onAxisChange = input => {
+    setYAxisValue(input.target.value);
+    onLabelChange(input.target.value);
   };
 
-  onTournamentChange = input => {
-    this.setState({ tournamentValue: input.target.value });
-    this.props.onTournamentChange(input.target.value);
+  const onTournamentNameChange = input => {
+    setTournamentValue(input.target.value);
+    onTournamentChange(input.target.value);
   };
 
-  render() {
-    return (
-      <StyledInputForms>
-        <p>Name your labels:</p>
-          <input
-            placeholder={this.state.tournamentName}
-            value={this.state.tournamentValue}
-            onChange={this.onTournamentChange}
-          />
-        <input
-          placeholder={this.state.yAxisName}
-          value={this.state.yAxisValue}
-          onChange={this.onAxisChange}
-        />
-      </StyledInputForms>
-    );
-  }
-}
+  return (
+    <StyledInputForms>
+      <p>Name your labels:</p>
+      <input
+        placeholder={tournamentName}
+        value={tournamentValue}
+        onChange={onTournamentNameChange}
+      />
+      <input
+        placeholder={yAxisName}
+        value={yAxisValue}
+        onChange={onAxisChange}
+      />
+    </StyledInputForms>
+  );
+};
 
 const StyledInputForms = styled.div`
   display: flex;
@@ -57,7 +49,7 @@ const StyledInputForms = styled.div`
   input {
     height: 40px;
     background-color: transparent;
-    border: 1px solid #D4D4D4;
+    border: 1px solid #d4d4d4;
     border-radius: 2px;
     padding-left: 16px;
     font-size: 16px;
@@ -66,7 +58,7 @@ const StyledInputForms = styled.div`
   }
 
   input::placeholder {
-    color: #A0A0A0;
+    color: #a0a0a0;
   }
 
   @media only screen and (max-width: 900px) {
@@ -74,6 +66,6 @@ const StyledInputForms = styled.div`
     order: 4;
     margin-bottom: 24px;
   }
-`
+`;
 
 export default InputForm;

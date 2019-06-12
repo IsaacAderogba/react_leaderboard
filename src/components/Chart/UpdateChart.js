@@ -1,44 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-class UpdateChart extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      inputValue: ""
-    };
-  }
-
-  inputHandler = input => {
-    this.setState({
-      inputValue: input.target.value
-    });
+const UpdateChart = ({ onSubmitUpdate, userData }) => {
+  const [inputValue, setInputValue] = useState("");
+  const inputHandler = input => {
+    setInputValue(input.target.value);
   };
 
-  onSubmit = event => {
+  const onSubmit = event => {
     event.preventDefault();
-    this.props.onSubmitUpdate(
-      this.props.userData.playerName,
-      this.state.inputValue
-    );
-    this.setState({ inputValue: "" });
+    onSubmitUpdate(userData.playerName, inputValue);
+    setInputValue("");
   };
 
-  render() {
-    return (
-      <StyledForm color={this.props.userData.playerColor}>
-        <p>Round score: {this.props.userData.currentValue} | Rate of progress: {this.props.userData.progressRate}</p>
-        <input
-          onChange={this.inputHandler}
-          value={this.state.inputValue}
-          placeholder="Enter this round's score..."
-        />
-        <button onClick={this.onSubmit}>Submit</button>
-      </StyledForm>
-    );
-  }
-}
+  return (
+    <StyledForm color={userData.playerColor}>
+      <p>
+        Round score: {userData.currentValue} | Rate of progress:{" "}
+        {userData.progressRate}
+      </p>
+      <input
+        onChange={inputHandler}
+        value={inputValue}
+        placeholder="Enter this round's score..."
+      />
+      <button onClick={onSubmit}>Submit</button>
+    </StyledForm>
+  );
+};
 
 const StyledForm = styled.form`
   display: flex;
@@ -55,7 +44,7 @@ const StyledForm = styled.form`
   input {
     height: 40px;
     background-color: transparent;
-    border: 1px solid #D4D4D4;
+    border: 1px solid #d4d4d4;
     border-radius: 2px;
     padding-left: 16px;
     font-size: 16px;
@@ -64,7 +53,7 @@ const StyledForm = styled.form`
   }
 
   input::placeholder {
-    color: #A0A0A0;
+    color: #a0a0a0;
   }
 
   button {

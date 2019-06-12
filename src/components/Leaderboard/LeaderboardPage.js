@@ -264,16 +264,16 @@ class LeaderboardPage extends React.Component {
       user.currentRank = rank;
       rank++;
       return user;
-    })
+    });
 
     newAppData.map(user => {
-      for(let i = 0; i < newAppData.length; i++) {
-        if(user.playerName === duplicateData[i].playerName) {
+      for (let i = 0; i < newAppData.length; i++) {
+        if (user.playerName === duplicateData[i].playerName) {
           user.currentRank = duplicateData[i].currentRank;
         }
       }
       return user;
-    })
+    });
 
     return newAppData;
   };
