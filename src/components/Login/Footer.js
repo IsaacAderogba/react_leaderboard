@@ -1,27 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 
-class Footer extends React.Component {
-  render() {
-    return (
-      <StyledFooter>
-        <footer>
-          <p>
-            Made with{" "}
-            <span role="img" aria-label="coffee">
-              ☕️
-            </span>{" "}
-            and{" "}
-            <span role="img" aria-label="love">
-              🤘🏼️
-            </span>{" "}
-            by Isaac Aderogba
-          </p>
-        </footer>
-      </StyledFooter>
-    );
-  }
-}
+const Footer = () => {
+  return (
+    <StyledFooter>
+      <footer>
+        <p>
+          Made with{" "}
+          <span role="img" aria-label="coffee">
+            ☕️
+          </span>{" "}
+          and{" "}
+          <span role="img" aria-label="love">
+            🤘🏼️
+          </span>{" "}
+          by Isaac Aderogba
+        </p>
+      </footer>
+    </StyledFooter>
+  );
+};
 
 const StyledFooter = styled.div`
   border-top: 1px solid #eaeaea;
@@ -35,9 +33,9 @@ const StyledFooter = styled.div`
     padding: 0 16px;
 
     p {
-    font-size: 16px;
-    color: lightslategrey;
-  }
+      font-size: 16px;
+      color: lightslategrey;
+    }
   }
 `;
 

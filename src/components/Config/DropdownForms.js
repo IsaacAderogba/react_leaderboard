@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 const DropdownForm = props => {
   const onChangeDropdownSuccess = input => {
@@ -12,29 +13,25 @@ const DropdownForm = props => {
   const renderSuccessMetric = () => {
     if (props.configData[2].successMetric === "HIGHER_SCORE") {
       return (
-        <div>
-          <select
-            name="success-metric"
-            onChange={onChangeDropdownSuccess}
-            value="HIGHER_SCORE"
-          >
-            <option value="HIGHER_SCORE">Higher Score is Better ↑</option>
-            <option value="LOWER_SCORE">Lower Score is Better ↓</option>
-          </select>
-        </div>
+        <select
+          name="success-metric"
+          onChange={onChangeDropdownSuccess}
+          value="HIGHER_SCORE"
+        >
+          <option value="HIGHER_SCORE">Higher score is better</option>
+          <option value="LOWER_SCORE">Lower score is better</option>
+        </select>
       );
     } else {
       return (
-        <div>
-          <select
-            name="success-metric"
-            onChange={onChangeDropdownSuccess}
-            value="LOWER_SCORE"
-          >
-            <option value="HIGHER_SCORE">Higher Score is Better ↑</option>
-            <option value="LOWER_SCORE">Lower Score is Better ↓</option>
-          </select>
-        </div>
+        <select
+          name="success-metric"
+          onChange={onChangeDropdownSuccess}
+          value="LOWER_SCORE"
+        >
+          <option value="HIGHER_SCORE">Higher score is better</option>
+          <option value="LOWER_SCORE">Lower score is better</option>
+        </select>
       );
     }
   };
@@ -42,40 +39,65 @@ const DropdownForm = props => {
   const renderProgressMetric = () => {
     if (props.configData[3].progressMetric === "ABSOLUTE_SCORE") {
       return (
-        <div>
-          <select
-            name="progress-metric"
-            onChange={onChangeDropdownProgress}
-            value="ABSOLUTE_SCORE"
-          >
-            <option value="ABSOLUTE_SCORE">Better Absolute Score</option>
-            <option value="RATE_OF_PROGRESS">Better Rate of Progress</option>
-          </select>
-        </div>
+        <select
+          name="progress-metric"
+          onChange={onChangeDropdownProgress}
+          value="ABSOLUTE_SCORE"
+        >
+          <option value="ABSOLUTE_SCORE">Better absolute round score</option>
+          <option value="RATE_OF_PROGRESS">Better round rate of progress</option>
+        </select>
       );
     } else {
       return (
-        <div>
-          <select
-            name="progress-metric"
-            onChange={onChangeDropdownProgress}
-            value="RATE_OF_PROGRESS"
-          >
-            <option value="ABSOLUTE_SCORE">Better Absolute Score</option>
-            <option value="RATE_OF_PROGRESS">Better Rate of Progress</option>
-          </select>
-        </div>
+        <select
+          name="progress-metric"
+          onChange={onChangeDropdownProgress}
+          value="RATE_OF_PROGRESS"
+        >
+          <option value="ABSOLUTE_SCORE">Better absolute round score</option>
+          <option value="RATE_OF_PROGRESS">Better round rate of progress</option>
+        </select>
       );
     }
   };
 
   return (
-    <div>
+    <StyledDropdownForms>
       <p>How are points awarded?</p>
       {renderSuccessMetric()}
       {renderProgressMetric()}
-    </div>
+    </StyledDropdownForms>
   );
 };
+
+const StyledDropdownForms = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+
+  p {
+    color: #e4e6e8;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  select {
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #d4d4d4;
+    padding-left: 16px;
+    font-size: 16px;
+    margin: 8px 0;
+    color: #A0A0A0;
+  }
+
+  @media only screen and (max-width: 900px) {
+    width: 80%;
+    order: 5;
+    margin-bottom: 24px;
+  }
+`;
 
 export default DropdownForm;

@@ -2,45 +2,42 @@ import React from "react";
 import InputForm from "./InputForm";
 import styled from "styled-components";
 
-class HeroForm extends React.Component {
-  onClickAddPlayer = () => {
-    this.props.addPlayer();
+const HeroForm = ({addPlayer, formInputs, onSubmitButton, changeFormValue}) => {
+  const onClickAddPlayer = () => {
+    addPlayer();
   };
 
-  renderAddPlayer = () => {
-    return this.props.formInputs.length < 4 ? (
-      <p className="right-aligned-hero-text" onClick={this.onClickAddPlayer}>
+  const renderAddPlayer = () => {
+    return formInputs.length < 4 ? (
+      <p className="right-aligned-hero-text" onClick={onClickAddPlayer}>
         Add another player
       </p>
     ) : null;
   };
 
-  render() {
-    const { formInputs } = this.props;
-    return (
-      <StyledHeroForm>
-        <h1>Big Catchy Heading Goes Here</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor.
-        </p>
-        <form onSubmit={this.props.onSubmitButton}>
-          {formInputs.map(inputContent => {
-            return (
-              <InputForm
-                key={inputContent.id}
-                inputContent={inputContent}
-                changeFormValue={this.props.changeFormValue}
-              />
-            );
-          })}
-          {this.renderAddPlayer()}
-          <button>Compete now</button>
-        </form>
-      </StyledHeroForm>
-    );
-  }
-}
+  return (
+    <StyledHeroForm>
+      <h1>Big Catchy Heading Goes Here</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor.
+      </p>
+      <form onSubmit={onSubmitButton}>
+        {formInputs.map(inputContent => {
+          return (
+            <InputForm
+              key={inputContent.id}
+              inputContent={inputContent}
+              changeFormValue={changeFormValue}
+            />
+          );
+        })}
+        {renderAddPlayer()}
+        <button>Compete now</button>
+      </form>
+    </StyledHeroForm>
+  );
+};
 
 const StyledHeroForm = styled.div`
   display: flex;

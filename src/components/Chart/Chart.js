@@ -103,7 +103,7 @@ const StyledProgressChart = styled.div`
   width: 45%;
   margin: 24px 2.5%;
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 900px) {
     width: 90%;
   }
 `;

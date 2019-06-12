@@ -1,4 +1,5 @@
 import React from "react";
+import styled from 'styled-components';
 
 class InputForm extends React.Component {
   constructor(props) {
@@ -24,23 +25,55 @@ class InputForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <StyledInputForms>
         <p>Name your labels:</p>
-        <div>
           <input
             placeholder={this.state.tournamentName}
             value={this.state.tournamentValue}
             onChange={this.onTournamentChange}
           />
-        </div>
         <input
           placeholder={this.state.yAxisName}
           value={this.state.yAxisValue}
           onChange={this.onAxisChange}
         />
-      </div>
+      </StyledInputForms>
     );
   }
 }
+
+const StyledInputForms = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+
+  p {
+    color: #e4e6e8;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  input {
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #D4D4D4;
+    border-radius: 2px;
+    padding-left: 16px;
+    font-size: 16px;
+    margin: 8px 0;
+    color: #e4e6e8;
+  }
+
+  input::placeholder {
+    color: #A0A0A0;
+  }
+
+  @media only screen and (max-width: 900px) {
+    width: 80%;
+    order: 4;
+    margin-bottom: 24px;
+  }
+`
 
 export default InputForm;

@@ -2,40 +2,32 @@ import React from "react";
 import styled from "styled-components";
 import logoIcon from "../../logo-icon.png";
 
-class Header extends React.Component {
-  renderText = () => {
-    if(this.props.configData !== undefined) {
-      return ( 
-          <h1>{this.props.configData[0].tournamentName}</h1>
-      )
+const Header = props => {
+  const renderText = () => {
+    if (props.configData !== undefined) {
+      return <h1>{props.configData[0].tournamentName}</h1>;
     } else {
-      return (
-        <h1>Leaderboard</h1>
-      )
+      return <h1>Leaderboard</h1>;
     }
-  }
+  };
 
-  render() {
-    return (
-      <StyledHeader>
-        <nav>
-          <div>
-            <div className="LogoIcon">
-              <img src={logoIcon} alt="Logo of website in icon format" />
-            </div>
-            <div className="LogoText">
-              {this.renderText()}
-            </div>
+  return (
+    <StyledHeader>
+      <nav>
+        <div>
+          <div className="LogoIcon">
+            <img src={logoIcon} alt="Logo of website in icon format" />
           </div>
-          <ul className="links">
-            <li>Terms</li>
-            <li>Privacy</li>
-          </ul>
-        </nav>
-      </StyledHeader>
-    );
-  }
-}
+          <div className="LogoText">{renderText()}</div>
+        </div>
+        <ul className="links">
+          <li>Terms</li>
+          <li>Privacy</li>
+        </ul>
+      </nav>
+    </StyledHeader>
+  );
+};
 
 const StyledHeader = styled.div`
   border-bottom: 1px solid #eaeaea;
@@ -83,6 +75,10 @@ const StyledHeader = styled.div`
             font-size: 32px;
             font-weight: bold;
             color: #61DAFB;
+
+            @media only screen and (max-width: 700px) {
+                display: none;
+            }
         }
     }
   }

@@ -196,19 +196,21 @@ class LeaderboardPage extends React.Component {
           <Header 
             configData={this.state.configData}
           />
-          <StyledLeaderboardContainer>
+          <StyledContainer>
             <InputForm
               configData={this.state.configData}
               onLabelChange={this.onLabelChange}
               onTournamentChange={this.onTournamentChange}
             />
-            <Leaderboard onCompleteRound={this.onCompleteRound} />
+            <Leaderboard 
+            playerData={this.state.appData}
+            onCompleteRound={this.onCompleteRound} 
+            />
             <DropdownForms
               configData={this.state.configData}
               onSuccessDropdownChange={this.onSuccessDropdownChange}
               onProgressDropdownChange={this.onProgressDropdownChange}
             />
-          </StyledLeaderboardContainer>
           <StyledChartsContainer>
             {this.state.appData.map(user => {
               return (
@@ -221,6 +223,7 @@ class LeaderboardPage extends React.Component {
               );
             })}
           </StyledChartsContainer>
+          </StyledContainer>
           <Footer />
         </div>
       );
@@ -228,15 +231,21 @@ class LeaderboardPage extends React.Component {
   }
 }
 
-const StyledLeaderboardContainer = styled.div`
+const StyledContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 24px auto 0 auto;
   justify-content: space-evenly;
   align-items: center;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledChartsContainer = styled.div`
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   max-width: 1280px;

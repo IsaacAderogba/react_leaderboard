@@ -1,26 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 
-class InputForm extends React.Component {
-  onChangeInput = input => {
-    this.props.changeFormValue(this.props.inputContent.id, input.target.value);
+const InputForm = props => {
+  const onChangeInput = input => {
+    props.changeFormValue(props.inputContent.id, input.target.value);
   };
 
-  render() {
-    const { placeholder, color, formValue } = this.props.inputContent;
+  const { placeholder, color, formValue } = props.inputContent;
 
-    return (
-      <StyledInputForm color={color}>
-        <div className="Colour Box" />
-        <input
-          placeholder={placeholder}
-          value={formValue}
-          onChange={this.onChangeInput}
-        />
-      </StyledInputForm>
-    );
-  }
-}
+  return (
+    <StyledInputForm color={color}>
+      <div className="Colour Box" />
+      <input
+        placeholder={placeholder}
+        value={formValue}
+        onChange={onChangeInput}
+      />
+    </StyledInputForm>
+  );
+};
 
 const StyledInputForm = styled.div`
     display: flex;
@@ -48,7 +46,7 @@ const StyledInputForm = styled.div`
     }
 
     input::placeholder {
-        color: #E4E6E8;
+        color: #A0A0A0;
     }
 `;
 
