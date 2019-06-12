@@ -33,7 +33,7 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 900px) {
     flex-direction: column;
   }
 `;

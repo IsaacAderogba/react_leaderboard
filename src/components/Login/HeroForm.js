@@ -45,9 +45,10 @@ const StyledHeroForm = styled.div`
   width: 50%;
   padding: 0 2.5%;
 
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 900px) {
     width: 90%;
     height: 80vh;
+    justify-content: center;
   }
 
   h1 {

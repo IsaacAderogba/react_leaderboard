@@ -99,7 +99,7 @@ const withAuthenticate = App => {
         return (
           <App
             userData={this.retrievedData}
-            configData={this.retrievedConfig}
+            extConfigData={this.retrievedConfig}
           />
         );
       }

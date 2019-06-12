@@ -12,10 +12,8 @@ import styled from "styled-components";
 class LeaderboardPage extends React.Component {
   constructor(props) {
     super(props);
-
     this.amendedUserData = [];
     this.amendedConfigData = [];
-
     this.state = {
       appData: [],
       configData: []
@@ -24,7 +22,6 @@ class LeaderboardPage extends React.Component {
 
   componentDidMount() {
     if ("data" in this.props.userData[0]) {
-      // do nothing
     } else {
       this.configureData();
     }
@@ -38,7 +35,7 @@ class LeaderboardPage extends React.Component {
         configData:
           this.amendedUserData.length >= 1
             ? this.amendedConfigData
-            : this.props.configData
+            : this.props.extConfigData
       };
     });
   }
@@ -112,7 +109,6 @@ class LeaderboardPage extends React.Component {
     });
 
     this.setState({ configData: newConfigData });
-    console.log(this.state.configData);
   };
 
   onProgressDropdownChange = value => {
@@ -124,7 +120,6 @@ class LeaderboardPage extends React.Component {
     });
 
     this.setState({ configData: newConfigData });
-    console.log(this.state.configData);
   };
 
   onSubmitUpdate = (name, value) => {
@@ -142,6 +137,7 @@ class LeaderboardPage extends React.Component {
           user.currentValue = parseFloat(value);
           let amendedDataArray = [];
           let amendedLabelArray = [];
+
           for (let i = 0; i < user.data.length; i++) {
             if (i === user.data.length - 1) {
               let amendedValue = parseFloat(value);
@@ -152,6 +148,7 @@ class LeaderboardPage extends React.Component {
               amendedLabelArray.push(user.labels[i]);
             }
           }
+
           user.data = amendedDataArray;
           user.labels = amendedLabelArray;
         }
@@ -160,7 +157,6 @@ class LeaderboardPage extends React.Component {
     });
 
     let modifiedAppData = this.calculateProgress(newAppData, name, value);
-
     this.setState({ appData: modifiedAppData });
   };
 
@@ -191,7 +187,6 @@ class LeaderboardPage extends React.Component {
 
     if (numCompleted === numToComplete) {
       let winnerName = this.designateWinner();
-      console.log(winnerName);
 
       let newAppData = this.state.appData.map(user => {
         if (user.playerName === winnerName) {
@@ -204,7 +199,6 @@ class LeaderboardPage extends React.Component {
       });
 
       let modifiedAppData = this.designateRank(newAppData);
-
       this.setState({ appData: modifiedAppData });
     }
   };
@@ -217,7 +211,6 @@ class LeaderboardPage extends React.Component {
     this.state.appData.forEach(user => {
       if (this.state.configData[2].successMetric === "HIGHER_SCORE") {
         if (this.state.configData[3].progressMetric === "ABSOLUTE_SCORE") {
-          console.log(user.playerName, user.currentValue);
           if (user.currentValue > higherScore) {
             higherScore = user.currentValue;
             winnerName = user.playerName;
@@ -225,7 +218,6 @@ class LeaderboardPage extends React.Component {
         } else if (
           this.state.configData[3].progressMetric === "RATE_OF_PROGRESS"
         ) {
-          console.log(user.playerName, user.progressRate);
           if (user.progressRate > higherScore) {
             higherScore = user.progressRate;
             winnerName = user.playerName;
@@ -235,7 +227,6 @@ class LeaderboardPage extends React.Component {
 
       if (this.state.configData[2].successMetric === "LOWER_SCORE") {
         if (this.state.configData[3].progressMetric === "ABSOLUTE_SCORE") {
-          console.log(user.playerName, user.currentValue);
           if (user.currentValue < lowerScore) {
             lowerScore = user.currentValue;
             winnerName = user.playerName;
@@ -243,7 +234,6 @@ class LeaderboardPage extends React.Component {
         } else if (
           this.state.configData[3].progressMetric === "RATE_OF_PROGRESS"
         ) {
-          console.log(user.playerName, user.progressRate);
           if (user.progressRate < lowerScore) {
             lowerScore = user.progressRate;
             winnerName = user.playerName;
@@ -279,8 +269,6 @@ class LeaderboardPage extends React.Component {
   };
 
   render() {
-    console.log("Data", this.state.appData, this.state.configData);
-
     if (this.state.configData.length < 1) {
       return <PageLoader />;
     } else {
