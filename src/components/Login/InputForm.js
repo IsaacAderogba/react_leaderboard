@@ -49,7 +49,6 @@ const StyledInputForm = styled.div`
 
     input::placeholder {
         color: #E4E6E8;
-
     }
 `;
 

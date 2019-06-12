@@ -92,6 +92,7 @@ const Chart = props => {
         <UpdateChart
           userData={props.userData}
           onSubmitUpdate={props.onSubmitUpdate}
+          configData={props.configData}
         />
       </StyledProgressChart>
     );
