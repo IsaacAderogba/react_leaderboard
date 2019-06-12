@@ -3,9 +3,9 @@ import { Line } from "react-chartjs-2";
 import styled from "styled-components";
 import PageLoader from "../Utility/PageLoader";
 
-import UpdateProgress from "./UpdateProgress";
+import UpdateChart from "./UpdateChart";
 
-const ProgressChart = props => {
+const Chart = props => {
   const { data, labels } = props.userData;
   const [chart, setChart] = useState({});
 
@@ -73,7 +73,7 @@ const ProgressChart = props => {
                   },
                   scaleLabel: {
                     display: true,
-                    labelString: props.configData[0].yAxisLabel,
+                    labelString: props.configData[1].yAxisLabel,
                     fontColor: "#E4E6E8",
                     fontSize: "18"
                   }
@@ -89,7 +89,7 @@ const ProgressChart = props => {
             }
           }}
         />
-        <UpdateProgress
+        <UpdateChart
           userData={props.userData}
           onSubmitUpdate={props.onSubmitUpdate}
         />
@@ -107,4 +107,4 @@ const StyledProgressChart = styled.div`
   }
 `;
 
-export default ProgressChart;
+export default Chart;

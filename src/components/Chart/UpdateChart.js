@@ -1,6 +1,6 @@
 import React from "react";
 
-class UpdateProgress extends React.Component {
+class UpdateChart extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,4 +32,4 @@ class UpdateProgress extends React.Component {
   }
 }
 
-export default UpdateProgress;
+export default UpdateChart;

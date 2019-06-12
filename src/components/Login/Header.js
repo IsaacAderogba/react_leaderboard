@@ -1,9 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import logoIcon from "../../logo-icon.png";
-import logoText from "../../logo-text.png";
 
 class Header extends React.Component {
+  renderText = () => {
+    if(this.props.configData !== undefined) {
+      return ( 
+          <h1>{this.props.configData[0].tournamentName}</h1>
+      )
+    } else {
+      return (
+        <h1>Leaderboard</h1>
+      )
+    }
+  }
+
   render() {
     return (
       <StyledHeader>
@@ -13,7 +24,7 @@ class Header extends React.Component {
               <img src={logoIcon} alt="Logo of website in icon format" />
             </div>
             <div className="LogoText">
-              <img src={logoText} alt="Logo of website in text format" />
+              {this.renderText()}
             </div>
           </div>
           <ul className="links">
@@ -68,14 +79,10 @@ const StyledHeader = styled.div`
             }
         }
 
-        .LogoText {
-            height: 25px;
-            img {
-                height: inherit;
-            }
-            @media only screen and (max-width: 700px) {
-                display: none;
-            }
+        .LogoText h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #61DAFB;
         }
     }
   }

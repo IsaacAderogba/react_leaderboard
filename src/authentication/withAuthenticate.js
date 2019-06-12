@@ -1,5 +1,5 @@
 import React from "react";
-import LoginPage from "../components/LoginPage/LoginPage";
+import LoginPage from "../components/Login/LoginPage";
 import uuid from "uuid";
 
 const formInputColors = ["#61DAFB", "#FFE44B", "#F77076", "#05FFD2"];

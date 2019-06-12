@@ -1,12 +1,12 @@
 import React from "react";
-import Header from "../LoginPage/Header";
-import Footer from "../LoginPage/Footer";
+import Header from "../Login/Header";
+import Footer from "../Login/Footer";
 import Leaderboard from "./Leaderboard";
-import InputForm from "./InputForm";
-import DropdownForm from "./DropdownForm";
+import InputForm from "../Config/InputForms";
+import DropdownForms from "../Config/DropdownForms";
 import PageLoader from "../Utility/PageLoader";
 
-import ProgressChart from "./ProgressChart";
+import Chart from "../Chart/Chart";
 import styled from "styled-components";
 
 class LeaderboardPage extends React.Component {
@@ -41,8 +41,6 @@ class LeaderboardPage extends React.Component {
             : this.props.configData
       };
     });
-
-    console.log("App Data", this.state.appData);
   }
 
   configureData = () => {
@@ -63,8 +61,10 @@ class LeaderboardPage extends React.Component {
 
     this.amendedConfigData = [
       ...this.amendedConfigData,
-      { yAxisLabel: "Enter Label" },
-      { successMetric: "Progress Up The Chart" },
+      { tournamentName: "Leaderboard" },
+      { yAxisLabel: "Enter Y-Axis Label" },
+      { successMetric: "HIGHER_SCORE" },
+      { progressMetric: "ABSOLUTE_SCORE" },
       { startFlag: false }
     ];
   };
@@ -92,7 +92,18 @@ class LeaderboardPage extends React.Component {
     this.setState({ configData: newConfigData });
   };
 
-  onDropdownChange = value => {
+  onTournamentChange = label => {
+    let newConfigData = this.state.configData.map(configPiece => {
+      if ("tournamentName" in configPiece) {
+        configPiece.tournamentName = label;
+      }
+      return configPiece;
+    });
+
+    this.setState({ configData: newConfigData });
+  }
+
+  onSuccessDropdownChange = value => {
     let newConfigData = this.state.configData.map(configPiece => {
       if ("successMetric" in configPiece) {
         configPiece.successMetric = value;
@@ -101,6 +112,19 @@ class LeaderboardPage extends React.Component {
     });
 
     this.setState({ configData: newConfigData });
+    console.log(this.state.configData);
+  };
+
+  onProgressDropdownChange = value => {
+    let newConfigData = this.state.configData.map(configPiece => {
+      if ("progressMetric" in configPiece) {
+        configPiece.progressMetric = value;
+      }
+      return configPiece;
+    });
+
+    this.setState({ configData: newConfigData });
+    console.log(this.state.configData);
   };
 
   onSubmitUpdate = (name, value) => {
@@ -161,28 +185,34 @@ class LeaderboardPage extends React.Component {
   };
 
   render() {
+    console.log("Data", this.state.appData, this.state.configData);
+
     if (this.state.configData.length < 1) {
       return <PageLoader />;
     } else {
       this.saveData();
       return (
         <div>
-          <Header />
+          <Header 
+            configData={this.state.configData}
+          />
           <StyledLeaderboardContainer>
             <InputForm
               configData={this.state.configData}
               onLabelChange={this.onLabelChange}
+              onTournamentChange={this.onTournamentChange}
             />
             <Leaderboard onCompleteRound={this.onCompleteRound} />
-            <DropdownForm
+            <DropdownForms
               configData={this.state.configData}
-              onDropdownChange={this.onDropdownChange}
+              onSuccessDropdownChange={this.onSuccessDropdownChange}
+              onProgressDropdownChange={this.onProgressDropdownChange}
             />
           </StyledLeaderboardContainer>
           <StyledChartsContainer>
             {this.state.appData.map(user => {
               return (
-                <ProgressChart
+                <Chart
                   onSubmitUpdate={this.onSubmitUpdate}
                   key={user.playerName}
                   userData={user}
