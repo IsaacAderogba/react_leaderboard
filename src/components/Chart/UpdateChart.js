@@ -28,7 +28,7 @@ class UpdateChart extends React.Component {
   render() {
     return (
       <StyledForm color={this.props.userData.playerColor}>
-        <p>Score: {this.props.userData.currentValue} | Progress Rate: {this.props.userData.progressRate}</p>
+        <p>Round score: {this.props.userData.currentValue} | Rate of progress: {this.props.userData.progressRate}</p>
         <input
           onChange={this.inputHandler}
           value={this.state.inputValue}

@@ -18,8 +18,8 @@ const DropdownForm = props => {
           onChange={onChangeDropdownSuccess}
           value="HIGHER_SCORE"
         >
-          <option value="HIGHER_SCORE">Higher score is better</option>
-          <option value="LOWER_SCORE">Lower score is better</option>
+          <option value="HIGHER_SCORE">Higher...</option>
+          <option value="LOWER_SCORE">Lower...</option>
         </select>
       );
     } else {
@@ -29,8 +29,8 @@ const DropdownForm = props => {
           onChange={onChangeDropdownSuccess}
           value="LOWER_SCORE"
         >
-          <option value="HIGHER_SCORE">Higher score is better</option>
-          <option value="LOWER_SCORE">Lower score is better</option>
+          <option value="HIGHER_SCORE">Higher...</option>
+          <option value="LOWER_SCORE">Lower...</option>
         </select>
       );
     }
@@ -44,8 +44,8 @@ const DropdownForm = props => {
           onChange={onChangeDropdownProgress}
           value="ABSOLUTE_SCORE"
         >
-          <option value="ABSOLUTE_SCORE">Better absolute round score</option>
-          <option value="RATE_OF_PROGRESS">Better round rate of progress</option>
+          <option value="ABSOLUTE_SCORE">...round score</option>
+          <option value="RATE_OF_PROGRESS">...round rate of progress</option>
         </select>
       );
     } else {
@@ -55,8 +55,8 @@ const DropdownForm = props => {
           onChange={onChangeDropdownProgress}
           value="RATE_OF_PROGRESS"
         >
-          <option value="ABSOLUTE_SCORE">Better absolute round score</option>
-          <option value="RATE_OF_PROGRESS">Better round rate of progress</option>
+          <option value="ABSOLUTE_SCORE">...round score</option>
+          <option value="RATE_OF_PROGRESS">...round rate of progress</option>
         </select>
       );
     }

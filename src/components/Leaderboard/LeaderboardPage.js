@@ -101,7 +101,7 @@ class LeaderboardPage extends React.Component {
     });
 
     this.setState({ configData: newConfigData });
-  }
+  };
 
   onSuccessDropdownChange = value => {
     let newConfigData = this.state.configData.map(configPiece => {
@@ -156,11 +156,27 @@ class LeaderboardPage extends React.Component {
           user.labels = amendedLabelArray;
         }
       }
-      console.log(user);
       return user;
     });
 
-    this.setState({ appData: newAppData });
+    let modifiedAppData = this.calculateProgress(newAppData, name, value);
+
+    this.setState({ appData: modifiedAppData });
+  };
+
+  calculateProgress = (newAppData, name, value) => {
+    let modifiedAppData = newAppData.map(user => {
+      if (user.playerName === name) {
+        if (user.data.length > 1) {
+          console.log(user);
+          let priorValue = user.data[user.data.length - 2];
+          user.progressRate = value - priorValue;
+        }
+      }
+      return user;
+    });
+
+    return modifiedAppData;
   };
 
   onCompleteRound = () => {
@@ -174,14 +190,92 @@ class LeaderboardPage extends React.Component {
     });
 
     if (numCompleted === numToComplete) {
+      let winnerName = this.designateWinner();
+      console.log(winnerName);
+
       let newAppData = this.state.appData.map(user => {
+        if (user.playerName === winnerName) {
+          user.points++;
+        }
         user.valueFlag = true;
         user.currentValue = 0;
+        user.progressRate = 0;
         return user;
       });
 
-      this.setState({ appData: newAppData });
+      let modifiedAppData = this.designateRank(newAppData);
+
+      this.setState({ appData: modifiedAppData });
     }
+  };
+
+  designateWinner = () => {
+    let winnerName = "";
+    let higherScore = -Infinity;
+    let lowerScore = +Infinity;
+
+    this.state.appData.forEach(user => {
+      if (this.state.configData[2].successMetric === "HIGHER_SCORE") {
+        if (this.state.configData[3].progressMetric === "ABSOLUTE_SCORE") {
+          console.log(user.playerName, user.currentValue);
+          if (user.currentValue > higherScore) {
+            higherScore = user.currentValue;
+            winnerName = user.playerName;
+          }
+        } else if (
+          this.state.configData[3].progressMetric === "RATE_OF_PROGRESS"
+        ) {
+          console.log(user.playerName, user.progressRate);
+          if (user.progressRate > higherScore) {
+            higherScore = user.progressRate;
+            winnerName = user.playerName;
+          }
+        }
+      }
+
+      if (this.state.configData[2].successMetric === "LOWER_SCORE") {
+        if (this.state.configData[3].progressMetric === "ABSOLUTE_SCORE") {
+          console.log(user.playerName, user.currentValue);
+          if (user.currentValue < lowerScore) {
+            lowerScore = user.currentValue;
+            winnerName = user.playerName;
+          }
+        } else if (
+          this.state.configData[3].progressMetric === "RATE_OF_PROGRESS"
+        ) {
+          console.log(user.playerName, user.progressRate);
+          if (user.progressRate < lowerScore) {
+            lowerScore = user.progressRate;
+            winnerName = user.playerName;
+          }
+        }
+      }
+    });
+
+    return winnerName;
+  };
+
+  designateRank = newAppData => {
+    let duplicateData = [...newAppData];
+    duplicateData.sort((a, b) => (a.points < b.points ? 1 : -1));
+
+    let rank = 1;
+    duplicateData.map(user => {
+      user.currentRank = rank;
+      rank++;
+      return user;
+    })
+
+    newAppData.map(user => {
+      for(let i = 0; i < newAppData.length; i++) {
+        if(user.playerName === duplicateData[i].playerName) {
+          user.currentRank = duplicateData[i].currentRank;
+        }
+      }
+      return user;
+    })
+
+    return newAppData;
   };
 
   render() {
@@ -193,36 +287,34 @@ class LeaderboardPage extends React.Component {
       this.saveData();
       return (
         <div>
-          <Header 
-            configData={this.state.configData}
-          />
+          <Header configData={this.state.configData} />
           <StyledContainer>
             <InputForm
               configData={this.state.configData}
               onLabelChange={this.onLabelChange}
               onTournamentChange={this.onTournamentChange}
             />
-            <Leaderboard 
-            playerData={this.state.appData}
-            onCompleteRound={this.onCompleteRound} 
+            <Leaderboard
+              playerData={this.state.appData}
+              onCompleteRound={this.onCompleteRound}
             />
             <DropdownForms
               configData={this.state.configData}
               onSuccessDropdownChange={this.onSuccessDropdownChange}
               onProgressDropdownChange={this.onProgressDropdownChange}
             />
-          <StyledChartsContainer>
-            {this.state.appData.map(user => {
-              return (
-                <Chart
-                  onSubmitUpdate={this.onSubmitUpdate}
-                  key={user.playerName}
-                  userData={user}
-                  configData={this.state.configData}
-                />
-              );
-            })}
-          </StyledChartsContainer>
+            <StyledChartsContainer>
+              {this.state.appData.map(user => {
+                return (
+                  <Chart
+                    onSubmitUpdate={this.onSubmitUpdate}
+                    key={user.playerName}
+                    userData={user}
+                    configData={this.state.configData}
+                  />
+                );
+              })}
+            </StyledChartsContainer>
           </StyledContainer>
           <Footer />
         </div>

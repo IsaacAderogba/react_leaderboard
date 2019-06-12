@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const PlayerDisplay = ({ player }) => {
-  console.log(player);
   return (
     <StyledPlayerDisplay color={player.playerColor} rank={player.currentRank}>
       <div>{player.currentRank}</div>
@@ -45,6 +44,7 @@ const StyledPlayerDisplay = styled.div`
 
   span:nth-of-type(4) {
     margin-right: 8px;
+    color: ${props => props.color};
   }
 
 `;
