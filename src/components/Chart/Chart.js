@@ -57,7 +57,7 @@ const Chart = props => {
           options={{
             title: {
               display: true,
-              text: `${props.userData.playerName}'s Progress`,
+              text: `${props.userData.playerName}`,
               fontColor: "#E4E6E8",
               fontSize: "24"
             },
