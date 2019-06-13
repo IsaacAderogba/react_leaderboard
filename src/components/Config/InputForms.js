@@ -35,6 +35,7 @@ const InputForm = ({ configData, onLabelChange, onTournamentChange }) => {
 };
 
 const StyledInputForms = styled.div`
+  padding-bottom: 16px;
   display: flex;
   flex-direction: column;
   width: 25%;

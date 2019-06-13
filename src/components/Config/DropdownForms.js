@@ -72,6 +72,7 @@ const DropdownForm = props => {
 };
 
 const StyledDropdownForms = styled.div`
+  padding-bottom: 16px;
   display: flex;
   flex-direction: column;
   width: 25%;
@@ -90,7 +91,7 @@ const StyledDropdownForms = styled.div`
     padding-left: 16px;
     font-size: 16px;
     margin: 8px 0;
-    color: #A0A0A0;
+    color: #a0a0a0;
   }
 
   @media only screen and (max-width: 900px) {

@@ -16,7 +16,8 @@ class LeaderboardPage extends React.Component {
     this.amendedConfigData = [];
     this.state = {
       appData: [],
-      configData: []
+      configData: [],
+      isSuccessMessage: null
     };
   }
 
@@ -199,9 +200,11 @@ class LeaderboardPage extends React.Component {
       });
 
       let modifiedAppData = this.designateRank(newAppData);
-      this.setState({ appData: modifiedAppData });
+      this.setState({ appData: modifiedAppData, isSuccessMessage: true });
+      setTimeout(() => this.setState({ isSuccessMessage: null }), 3000);
     } else {
-      alert("Each player must first submit their progress!");
+      this.setState({ isSuccessMessage: false });
+      setTimeout(() => this.setState({ isSuccessMessage: null }), 3000);
     }
   };
 
@@ -287,6 +290,7 @@ class LeaderboardPage extends React.Component {
             <Leaderboard
               playerData={this.state.appData}
               onCompleteRound={this.onCompleteRound}
+              isSuccessMessage={this.state.isSuccessMessage}
             />
             <DropdownForms
               configData={this.state.configData}
@@ -335,8 +339,6 @@ const StyledContainer = styled.div`
       opacity: 1;
     }
   }
-
-  /* Firefox < 16 */
   @-moz-keyframes fadein {
     from {
       opacity: 0;
@@ -346,7 +348,6 @@ const StyledContainer = styled.div`
     }
   }
 
-  /* Safari, Chrome and Opera > 12.1 */
   @-webkit-keyframes fadein {
     from {
       opacity: 0;
@@ -356,7 +357,6 @@ const StyledContainer = styled.div`
     }
   }
 
-  /* Internet Explorer */
   @-ms-keyframes fadein {
     from {
       opacity: 0;
@@ -366,7 +366,6 @@ const StyledContainer = styled.div`
     }
   }
 
-  /* Opera < 12.1 */
   @-o-keyframes fadein {
     from {
       opacity: 0;

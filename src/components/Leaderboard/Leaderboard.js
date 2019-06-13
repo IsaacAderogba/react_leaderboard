@@ -4,16 +4,15 @@ import { useSpring, animated } from "react-spring";
 
 import PlayerDisplay from "./PlayerDisplay";
 
-const Leaderboard = ({ onCompleteRound, playerData }) => {
+const Leaderboard = ({ onCompleteRound, playerData, isSuccessMessage }) => {
   const [hovered, setHovered] = useState(false);
-
   const hoverEffect = useSpring({
     to: {
       transform: `scale(${hovered ? 1.02 : 1})`,
       color: hovered ? "white" : "#24272e"
     }
   });
-  
+
   return (
     <StyledLeaderboard>
       {playerData.map(player => (
@@ -27,6 +26,16 @@ const Leaderboard = ({ onCompleteRound, playerData }) => {
       >
         Complete Round
       </animated.button>
+      <div className="message">
+        <div className="success">
+          {isSuccessMessage === true ? "Round successfully completed!" : ""}
+        </div>
+        <div className="failure">
+          {isSuccessMessage === false
+            ? "Each player must submit their progress!"
+            : ""}
+        </div>
+      </div>
     </StyledLeaderboard>
   );
 };
@@ -36,6 +45,22 @@ const StyledLeaderboard = styled.div`
   flex-direction: column;
   align-items: center;
   width: 40%;
+
+  .message {
+    display: flex;
+    margin: 0;
+    padding: 8px 0 0 0;
+    height: 16px;
+    order: 101;
+  }
+
+  .success {
+    color: #05ffd2;
+  }
+
+  .failure {
+    color: #f77076;
+  }
 
   button {
     order: 100;
@@ -51,11 +76,11 @@ const StyledLeaderboard = styled.div`
     color: #282c34;
   }
 
-   p {
-     color: #F77076;
-     margin-top: 16px;
-     order: 101
-   }
+  p {
+    color: #f77076;
+    margin-top: 16px;
+    order: 101;
+  }
 
   @media only screen and (max-width: 900px) {
     width: 80%;
