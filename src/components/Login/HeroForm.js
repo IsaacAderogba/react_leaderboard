@@ -31,10 +31,10 @@ const HeroForm = ({
 
   return (
     <StyledHeroForm>
-      <h1>Big Catchy Heading Goes Here</h1>
+      <h1>Compete Against Your Friends</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor.
+        With Leaderboard, you can easily set up your own round-based
+        tournaments.
       </p>
       <form onSubmit={onSubmitButton}>
         {formInputs.map(inputContent => {
@@ -63,7 +63,7 @@ const StyledHeroForm = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  min-height: 80vh;
+  min-height: 60vh;
   justify-content: center;
 
   padding: 0 2.5%;
@@ -77,7 +77,7 @@ const StyledHeroForm = styled.div`
     margin-top: 0;
     color: white;
     font-size: 48px;
-    margin-bottom: 0;
+    margin-bottom: 16px;
   }
 
   p {
