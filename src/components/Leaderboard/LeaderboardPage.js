@@ -389,6 +389,10 @@ const StyledChartsContainer = styled.div`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 900px) {
+    width: 90%;
+  }
 `;
 
 export default LeaderboardPage;

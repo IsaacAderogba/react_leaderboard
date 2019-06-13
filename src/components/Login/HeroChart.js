@@ -16,6 +16,7 @@ const StyledHeroChart = styled.div`
   width: 50%;
   margin: 40px 0;
   padding: 0 2.5%;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;

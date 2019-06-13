@@ -63,6 +63,8 @@ const StyledHeroForm = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
+  min-height: 80vh;
+
   padding: 0 2.5%;
   margin: 40px 0;
 
