@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
 
 import PlayerDisplay from "./PlayerDisplay";
 
 const Leaderboard = ({ onCompleteRound, playerData }) => {
+  const [hovered, setHovered] = useState(false);
 
+  const hoverEffect = useSpring({
+    to: {
+      transform: `scale(${hovered ? 1.02 : 1})`,
+      color: hovered ? "white" : "#24272e"
+    }
+  });
+  
   return (
     <StyledLeaderboard>
       {playerData.map(player => (
         <PlayerDisplay player={player} key={player.playerName} />
       ))}
-      <button onClick={onCompleteRound}>Complete Round</button>
+      <animated.button
+        style={hoverEffect}
+        onMouseOver={() => setHovered(true)}
+        onMouseOut={() => setHovered(false)}
+        onClick={onCompleteRound}
+      >
+        Complete Round
+      </animated.button>
     </StyledLeaderboard>
   );
 };
@@ -34,6 +50,12 @@ const StyledLeaderboard = styled.div`
     background: #61dafb;
     color: #282c34;
   }
+
+   p {
+     color: #F77076;
+     margin-top: 16px;
+     order: 101
+   }
 
   @media only screen and (max-width: 900px) {
     width: 80%;

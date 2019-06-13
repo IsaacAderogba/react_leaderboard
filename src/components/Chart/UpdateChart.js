@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
 
 const UpdateChart = ({ onSubmitUpdate, userData }) => {
   const [inputValue, setInputValue] = useState("");
+  const [hovered, setHovered] = useState(false);
+  const hoverEffect = useSpring({
+    to: {
+      transform: `scale(${hovered ? 1.01 : 1})`,
+      color: hovered ? "white" : "#24272e"
+    }
+  });
+
   const inputHandler = input => {
     setInputValue(input.target.value);
   };
@@ -24,7 +33,14 @@ const UpdateChart = ({ onSubmitUpdate, userData }) => {
         value={inputValue}
         placeholder="Enter this round's score..."
       />
-      <button onClick={onSubmit}>Submit</button>
+      <animated.button
+        style={hoverEffect}
+        onMouseOver={() => setHovered(true)}
+        onMouseOut={() => setHovered(false)}
+        onClick={onSubmit}
+      >
+        Submit
+      </animated.button>
     </StyledForm>
   );
 };

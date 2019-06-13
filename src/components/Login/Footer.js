@@ -14,7 +14,7 @@ const Footer = () => {
           <span role="img" aria-label="love">
             🤘🏼️
           </span>{" "}
-          by Isaac Aderogba
+          by <a href='https://github.com/IsaacAderogba'>Isaac Aderogba</a>
         </p>
       </footer>
     </StyledFooter>
@@ -36,6 +36,20 @@ const StyledFooter = styled.div`
       font-size: 16px;
       color: lightslategrey;
     }
+
+    a {
+      color: #E4E6E8;
+      cursor: pointer;
+      transition-duration: 0.3s;
+
+    }
+
+    a:hover {
+      color: #61DAFB;
+      transition: color 0.3s ease-in-out;
+    }
+
+
   }
 `;
 

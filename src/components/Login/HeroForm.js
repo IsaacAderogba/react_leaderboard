@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import InputForm from "./InputForm";
 import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
 
-const HeroForm = ({addPlayer, formInputs, onSubmitButton, changeFormValue}) => {
+const HeroForm = ({
+  addPlayer,
+  formInputs,
+  onSubmitButton,
+  changeFormValue
+}) => {
+  const [hovered, setHovered] = useState(false);
+  const hoverEffect = useSpring({
+    to: {
+      transform: `scale(${hovered ? 1.01 : 1})`,
+      color: hovered ? "white" : "#24272e"
+    }
+  });
+
   const onClickAddPlayer = () => {
     addPlayer();
   };
@@ -33,7 +47,13 @@ const HeroForm = ({addPlayer, formInputs, onSubmitButton, changeFormValue}) => {
           );
         })}
         {renderAddPlayer()}
-        <button>Compete now</button>
+        <animated.button
+          style={hoverEffect}
+          onMouseOver={() => setHovered(true)}
+          onMouseOut={() => setHovered(false)}
+        >
+          Compete now
+        </animated.button>
       </form>
     </StyledHeroForm>
   );

@@ -11,6 +11,11 @@ const Header = props => {
     }
   };
 
+  const resetLeaderboard = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
+
   return (
     <StyledHeader>
       <nav>
@@ -21,8 +26,7 @@ const Header = props => {
           <div className="LogoText">{renderText()}</div>
         </div>
         <ul className="links">
-          <li>Terms</li>
-          <li>Privacy</li>
+          <li onClick={resetLeaderboard}>Reset Leaderboard</li>
         </ul>
       </nav>
     </StyledHeader>
@@ -44,12 +48,20 @@ const StyledHeader = styled.div`
     ul li {
       display: inline-block;
       font-size: 20px;
-      color: #ffffff;
+      color: #E4E6E8;
       margin-left: 64px;
+      cursor: pointer;
+      transition-duration: 0.3s;
+
 
       @media only screen and (max-width: 700px) {
         margin-left: 24px;
       }
+    }
+
+    ul li:hover {
+      color: #61DAFB;
+      transition: color 0.3s ease-in-out;
     }
 
     & > div {

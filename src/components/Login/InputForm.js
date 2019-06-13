@@ -1,22 +1,30 @@
 import React from "react";
 import styled from "styled-components";
+import { useSpring, animated } from "react-spring";
 
 const InputForm = props => {
   const onChangeInput = input => {
     props.changeFormValue(props.inputContent.id, input.target.value);
   };
 
+  const fade = useSpring({
+    from: { opacity: 0 },
+    opacity: 1
+  });
+
   const { placeholder, color, formValue } = props.inputContent;
 
   return (
-    <StyledInputForm color={color}>
-      <div className="Colour Box" />
-      <input
-        placeholder={placeholder}
-        value={formValue}
-        onChange={onChangeInput}
-      />
-    </StyledInputForm>
+    <animated.div style={fade}>
+      <StyledInputForm color={color}>
+        <div className="Colour Box" />
+        <input
+          placeholder={placeholder}
+          value={formValue}
+          onChange={onChangeInput}
+        />
+      </StyledInputForm>
+    </animated.div>
   );
 };
 
