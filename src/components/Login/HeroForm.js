@@ -76,7 +76,7 @@ const StyledHeroForm = styled.div`
   h1 {
     margin-top: 0;
     color: white;
-    font-size: 48px;
+    font-size: 36px;
     margin-bottom: 16px;
   }
 
