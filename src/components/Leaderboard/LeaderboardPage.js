@@ -130,18 +130,18 @@ class LeaderboardPage extends React.Component {
         let truncDate = dateString.substr(4, 6);
 
         if (user.valueFlag) {
-          user.currentValue = parseFloat(value);
+          user.currentValue = parseFloat(value).toFixed(2);
           user.data.push(user.currentValue);
           user.labels.push(truncDate);
           user.valueFlag = false;
         } else {
-          user.currentValue = parseFloat(value);
+          user.currentValue = parseFloat(value).toFixed(2);
           let amendedDataArray = [];
           let amendedLabelArray = [];
 
           for (let i = 0; i < user.data.length; i++) {
             if (i === user.data.length - 1) {
-              let amendedValue = parseFloat(value);
+              let amendedValue = parseFloat(value).toFixed(2);
               amendedDataArray.push(amendedValue);
               amendedLabelArray.push(truncDate);
             } else {
@@ -165,9 +165,10 @@ class LeaderboardPage extends React.Component {
     let modifiedAppData = newAppData.map(user => {
       if (user.playerName === name) {
         if (user.data.length > 1) {
-          console.log(user);
           let priorValue = user.data[user.data.length - 2];
-          user.progressRate = value - priorValue;
+          user.progressRate = (value - priorValue).toFixed(2);
+          console.log(user.progressRate);
+
         }
       }
       return user;
