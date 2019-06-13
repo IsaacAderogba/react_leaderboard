@@ -64,10 +64,10 @@ const StyledHeroForm = styled.div`
   flex-direction: column;
   width: 50%;
   padding: 0 2.5%;
+  margin: 40px 0;
 
   @media only screen and (max-width: 900px) {
     width: 90%;
-    height: 80vh;
     justify-content: center;
   }
 
